@@ -1,9 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+
+@section('page-title', 'Statics')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-lg-12">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 

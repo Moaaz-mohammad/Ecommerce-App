@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -25,3 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('/setSettings', function() {
 //     Role::create(['name' =>'customer']);
 // });
+
+Route::middleware(['auth'])->group(function() {
+    Route::resource('categories', CategoryController::class);
+});
