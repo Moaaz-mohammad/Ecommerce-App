@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -29,4 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->group(function() {
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
+    // Route::post('delete/one/product/{image}', ProductController::class, 'destroyOneimage')->name('delete.one.product');
+    Route::post('delete/one/product/{image}' , [ProductController::class , 'destroyOneImage'])->name('delete.one.product')->middleware('auth');
 });
