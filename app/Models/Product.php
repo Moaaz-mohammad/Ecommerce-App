@@ -17,6 +17,9 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function order_details() {
+        return $this->hasMany(Order_Detail::class);
+    }
     public function images() {
         return $this->morphMany(Image::class, 'imageable');
     }

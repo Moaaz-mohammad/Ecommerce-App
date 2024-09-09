@@ -22,11 +22,11 @@
                 <label for="image" class="form-label">Category Image</label>
                 <input type="file" class="form-control-file" name="category_picture" id="image" required accept="image/*">
               </div>
-              <button type="submit" class="btn btn-success">Create</button>
-            </form>
+                <button type="submit" class="btn btn-success">Create</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 @endsection

@@ -32,6 +32,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $request->validate([
             'name' => 'required|string',
             'category_picture' => 'required|image|mimes:jpg,png',

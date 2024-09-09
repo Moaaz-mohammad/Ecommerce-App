@@ -17,7 +17,7 @@
                   <th>ID</th>
                   <th>Name</th>
                   <th>category</th>
-                  <th>Description</th>
+                  {{-- <th>Description</th> --}}
                   <th>price</th>
                   <th>stock</th>
                   <th>Created At</th>
@@ -30,7 +30,7 @@
                         <td>{{$product->id}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->category->name}}</td>
-                        <td>{{$product->description}}</td>
+                        {{-- <td>{{$product->description}}</td> --}}
                         <td>{{$product->price}}</td>
                         <td>{{$product->stock}}</td>
                         <td>{{$product->created_at}}</td>
@@ -50,7 +50,7 @@
                   <th>ID</th>
                   <th>Name</th>
                   <th>category</th>
-                  <th>Description</th>
+                  {{-- <th>Description</th> --}}
                   <th>price</th>
                   <th>stock</th>
                   <th>Created At</th>

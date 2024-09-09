@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Order_Detail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,7 +13,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::OrderBy('created_at', 'DESC')->get();
+        return view('dashboard.orders.index', compact('orders'));
     }
 
     /**
@@ -36,7 +38,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $details = $order->order_details;
+        return view('dashboard.orders.details', compact('details', 'order'));
     }
 
     /**

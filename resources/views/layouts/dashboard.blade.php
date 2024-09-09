@@ -87,6 +87,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-header">Category Mangement</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-copy"></i>
@@ -111,6 +112,7 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-header">Products Mangement</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-copy"></i>
@@ -134,6 +136,15 @@
                   </a>
                 </li>
               </ul>
+            </li>
+            <li class="nav-header">Orders Mangement</li>
+            <li class="nav-item">
+              <a href="{{route('orders.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>
+                  Orders
+                </p>
+              </a>
             </li>
           </ul>
         </nav>

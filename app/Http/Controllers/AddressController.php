@@ -12,7 +12,8 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $addresses = Address::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
+        return view('addresses.index', compact('addresses'));
     }
 
     /**
@@ -28,7 +29,20 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'address' => 'required',
+            'zip_code' => 'required',
+            'title' => 'required',
+        ]);
+
+        $new_address = Address::create([
+            'user_id' => auth()->id(),
+            'address' => $request->address,
+            'zip_code' => $request->zip_code,
+            'title' => $request->title,
+        ]);
+
+        return redirect()->back()->with('success', 'Address added successfully');
     }
 
     /**
@@ -52,7 +66,18 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $request->validate([
+            'address' => 'required',
+            'zip_code' => 'required',
+            'title' => 'required',
+        ]);
+        $address->update([
+            'address' => $request->address,
+            'zip_code' => $request->zip_code,
+            'title' => $request->title,
+        ]);
+
+        return redirect()->back()->with('success', 'Address Updated Successfully');
     }
 
     /**
@@ -60,6 +85,7 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        $address->delete();
+        return redirect()->back()->with('success', 'Address deleted successfully');
     }
 }

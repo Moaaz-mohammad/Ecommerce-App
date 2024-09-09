@@ -41,7 +41,7 @@
               </div>
               <div class="form-group">
                 <label for="image" class="form-label">Product Image</label>
-                <input type="file" class="form-control-file" name="product_picture[]" id="image" multiple required accept="image/*">
+                <input type="file" class="form-control-file" name="product_picture[]" id="image" multiple accept="image/*">
               </div>
               <button type="submit" class="btn btn-success">Update</button>
             </form>
