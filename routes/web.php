@@ -21,8 +21,20 @@ use Spatie\Permission\Models\Role;
 |
 */
 
+// Cart Routes
+Route::get('cart/', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/update_plus/{id}', [CartController::class, 'update_plus'])->name('cart.update.plus');
+Route::post('/cart/update_minus/{id}', [CartController::class, 'update_minus'])->name('cart.update.minus');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+// Cart Routes 
+
 Route::get('/', [ThemeController::class, 'index'])->name('store');
 Route::get('{id}/cart', [ThemeController::class, 'cart'])->name('cart');
+Route::get('contact/', [ThemeController::class, 'contact'])->name('contact');
+Route::get('/shop', [ThemeController::class, 'shop'])->name('shop');
+Route::get('/product/details/{id}', [ThemeController::class, 'ProductDetails'])->name('product.details');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::resource('addresses', AddressController::class);
@@ -37,11 +49,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::get('/setSettings', function() {
-//     Role::create(['name' =>'customer']);
+//     Role::create(['name' =>'admin']);
 // });
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::resource('categories', CategoryController::class);
+    Route::put('category/{cat}/', [CategoryController::class, 'activeDisabled'])->name('category.status.update');
     Route::resource('products', ProductController::class);
     Route::post('delete/one/product/{image}' , [ProductController::class , 'destroyOneImage'])->name('delete.one.product')->middleware('auth');
     Route::get('orders/', [OrderController::class, 'index'])->name('orders.index');

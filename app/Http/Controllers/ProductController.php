@@ -37,8 +37,11 @@ class ProductController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|int',
+            'descount_price' => 'required|int',
             'stock' => 'required|string',
             'product_picture.*' => 'required|image|mimes:jpg,png',
+            'product_show_status' => 'required|string',
+            'product_status' => 'required|string',
         ]);
 
         $product =  Product::create($request->all());
@@ -52,7 +55,7 @@ class ProductController extends Controller
         }
 
 
-        return redirect()->route('products.index')->with('success' , 'Product Added SSuccessfully');
+        return redirect()->route('products.index')->with('success' , 'Product Added Successfully');
     }
 
     /**
@@ -80,8 +83,11 @@ class ProductController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|int',
+            'descount_price' => 'required|int',
             'stock' => 'required|string',
             'product_images.*' => 'sometimes|required|image|mimes:png,jpg',
+            'product_show_status' => 'sometimes|required|string',
+            'product_status' => 'sometimes|required|string',
         ]);
         $product->update($request->all());
 

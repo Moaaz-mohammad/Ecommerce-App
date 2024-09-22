@@ -36,10 +36,24 @@
                 <input type="number" class="form-control" name="price" value="{{$product->price}}" id="price" placeholder="Enter product price" required>
               </div>
               <div class="mb-3">
+                <label for="descount_price" class="form-label">Descount Price</label>
+                <input type="number" class="form-control" name="descount_price" value="{{$product->descount_price}}" id="descount_price" placeholder="Enter Descount Price" required>
+              </div>
+              <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" name="description" id="description" placeholder="Enter product description" required>{{$product->description}}</textarea>
               </div>
-              <div class="form-group">
+              <select class="form-control mb-3" name="product_show_status" aria-label="Default select example">
+                <option value="active">Active</option>
+                <option value="disabled">Disabled</option>
+              </select>
+              <select class="form-control mb-3" name="product_of_category_status" aria-label="Default select example">
+                <option value="none">none</option>
+                <option value="featured">Featured</option>
+                <option value="popular">Popular</option>
+                <option value="best-seller">Best Seller</option>
+              </select>
+                <div class="form-group">
                 <label for="image" class="form-label">Product Image</label>
                 <input type="file" class="form-control-file" name="product_picture[]" id="image" multiple accept="image/*">
               </div>

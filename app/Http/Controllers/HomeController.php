@@ -33,9 +33,13 @@ class HomeController extends Controller
             $products = Product::all();
             return view('dashboard.products.index', compact('categories', 'products'));
         }else {
+            $categories = Category::where('category_status', 'active')->get();
+            $categories_featured = Category::where('product_of_category_status', 'featured')->get();
+            $categories_popular = Category::where('product_of_category_status', 'popular')->get();
+            $categories_best_seeler = Category::where('product_of_category_status', 'best-seller')->get();
             $categories = Category::all();
             $products = Product::all();
-            return view('welcome', compact('categories', 'products'));
+            return view('welcome', compact('categories', 'products', 'categories_best_seeler', 'categories_popular', 'categories_featured'));
         }
     }
 }

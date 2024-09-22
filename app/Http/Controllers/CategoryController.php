@@ -36,6 +36,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string',
             'category_picture' => 'required|image|mimes:jpg,png',
+            'category_status' => 'required|string',
         ]);
 
         $category = Category::create($request->all());
@@ -80,7 +81,7 @@ class CategoryController extends Controller
         $category->update($request->all());
 
         if ($request->hasFile('category_picture')) {
-            Storage::delete('storage.categories' . $request->image->path);
+            Storage::delete('storage.categories' . $category->image->path);
             $category->image->delete();
             $image = $request->file('category_picture');
             $image_name = time() . '.' . $image->extension();
@@ -100,5 +101,22 @@ class CategoryController extends Controller
         $category->image->delete();
         $category->delete();
         return redirect()->back()->with('success', 'Category deleted successfuly');
+    }
+
+    public function activeDisabled(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if ($category->category_status == 'active') {
+            $category->update([
+                'category_status' => 'disabled'
+            ]);
+        }
+        else {
+            $category->update([
+                'category_status' => 'active'
+            ]);
+        }
+            // return $category;
+        return redirect()->back()->with('success', 'Category Status Updated Successfully');
     }
 }
