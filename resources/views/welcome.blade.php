@@ -4,11 +4,12 @@
 
 @section('content')
         <!-- Hero Start -->
-        <div class="container-fluid py-5 mb-5 hero-header">
+        <div class="container-fluid py-5 mb-5 hero-header mt-5">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
+                    {{-- @include('alert') --}}
                     <div class="col-md-12 col-lg-7">
-                        <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
+                        <h4 class="my-3 text-secondary">100% Organic Foods</h4>
                         <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
                         <div class="position-relative mx-auto">
                             <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
@@ -150,6 +151,8 @@
                                                                 </form>
                                                                 <a href="{{route('product.details', $product->id)}}" id="addBtn" class="btn border border-secondary rounded-pill px-3 text-primary mb-2"><i class="bi bi-arrow-left-short"></i></i>Details</a>
                                                             </div>
+                                                            <input type="text" id="produtID" hidden value="{{$product->id}}">
+                                                            <button id="AddBtn" data-cartLength="{{count($cart)}}" data-id="{{$product->id}}" class="btn border border-secondary rounded-pill px-3 text-primary">Add</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,6 +335,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
                                             </form>
+                                            <button id="AddBtn" data-cartLength="{{count($cart)}}" data-id="{{$product->id}}" class="btn my-2 border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -555,10 +559,52 @@
 
 @section('js')
     <script>
-        // let addBtn = document.querySelector('#addBtn');
-        // addBtn.onclick = function () {
-        //     let cartNumber = document.querySelector('#CartNumber');
-        //     cartNumber.text = + 1;
-        // }
+        let addBtn = document.querySelectorAll('#AddBtn');
+        let number = document.querySelector('#CartNumber');
+
+        // addBtn.forEach(button => {
+        //     button.addEventListener('click', function () {
+        //         let productID = button.getAttribute('data-id');
+        //         let cartLength = Number(button.getAttribute('data-cartLength'));
+
+        //         fetch("{{route('addToCart')}}", {
+        //             method : 'POST',
+        //             headers : {
+        //             'Content-Type' : 'application/json',
+        //             'X-CSRF-TOKEN': '{{ csrf_token()}}'
+        //             },
+        //             body : JSON.stringify({
+        //                 productId : productID,
+        //             })
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => CartNumber.innerHTML = data.length)
+        //         .catch(error => console.Error('Error', error))
+        //     })
+        // });
+
+        AddtoCart(addBtn, number)
+
+        function AddtoCart(Btn, CartNumber) {
+            Btn.forEach(button => {
+            button.addEventListener('click', function () {
+                let productID = button.getAttribute('data-id');
+
+                fetch("{{route('addToCart')}}", {
+                    method : 'POST',
+                    headers : {
+                    'Content-Type' : 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token()}}'
+                    },
+                    body : JSON.stringify({
+                        productId : productID,
+                    })
+                })
+                .then(response => response.json())
+                .then(data => CartNumber.innerHTML = data.length)
+                .catch(error => console.Error('Error', error))
+            })
+        });
+        }
     </script>
 @endsection

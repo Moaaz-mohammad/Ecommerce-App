@@ -33,7 +33,7 @@
                   <th scope="col">Address</th>
                   <th scope="col">Total Quantity</th>
                   <th scope="col">Total</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Order Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,6 +45,7 @@
                   <td>
                     <a href="{{route('my.order', $order->id)}}" class="btn btn-warning btn-sm">Details</a>
                   </td>
+                  <td>{{$order->order_status}}</td>
                 </tr>
                 @endforeach
               </tbody>

@@ -36,14 +36,15 @@
 
   <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="{{asset('dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+      <img class="animation__shake"  src="{{asset('dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
     </div>
 
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        </li>
-        <ul class="navbar-nav ml-auto">
+    </li>
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link" href="{{route('store')}}">Go to store</a>
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               {{Auth::user()->name}}
@@ -64,7 +65,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link pb-3 mb-3">
+      <a href="{{route('home')}}" class="brand-link pb-3 mb-3">
         <img src="{{asset('dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Ecommerce</span>
       </a>
@@ -87,10 +88,29 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-header">Coustomers Mangement</li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Coustomers
+                  <i class="fas fa-angle-left right"></i>
+                  {{-- <span class="badge badge-info right">6</span> --}}
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('customers.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Coustomers</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li class="nav-header">Category Mangement</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
+                <i class="nav-icon fas fa-stream"></i>
                 <p>
                   Catygories
                   <i class="fas fa-angle-left right"></i>
@@ -115,7 +135,7 @@
             <li class="nav-header">Products Mangement</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
+                <i class="nav-icon fas fa-store"></i>
                 <p>
                   Products
                   <i class="fas fa-angle-left right"></i>
@@ -140,11 +160,46 @@
             <li class="nav-header">Orders Mangement</li>
             <li class="nav-item">
               <a href="{{route('orders.index')}}" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
+                <i class="nav-icon fas fa-truck-moving"></i>
                 <p>
                   Orders
                 </p>
               </a>
+            </li>
+            <li class="nav-header">Notificatoins</li>
+            <li class="nav-item">
+              <a href="{{route('notification')}}" class="nav-link">
+                <i class="nav-icon fas fa-bell"></i>
+                <p>
+                  Notificatoins 
+                  <span class="ml=2 text-danger text-bold">{{DB::table("notifications")->count()}}</span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-header">Codes Mangement</li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-store"></i>
+                <p>
+                  Code 
+                  <i class="fas fa-angle-left right"></i>
+                  {{-- <span class="badge badge-info right">6</span> --}}
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('code.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Codes</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('code.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create Code</p>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </nav>

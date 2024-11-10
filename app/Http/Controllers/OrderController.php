@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Order_Detail;
+use App\Models\Product;
+use App\Models\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -14,7 +19,8 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::OrderBy('created_at', 'DESC')->get();
-        return view('dashboard.orders.index', compact('orders'));
+        $cart = session()->get('cart', []);
+        return view('dashboard.orders.index', compact('orders','cart'));
     }
 
     /**
@@ -39,7 +45,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $details = $order->order_details;
-        return view('dashboard.orders.details', compact('details', 'order'));
+        return view('dashboard.orders.details', compact('details', 'order',));
     }
 
     /**
@@ -63,6 +69,14 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $user = Auth::user();
+        $message = 'This Order Has Done';
+        $orderId = $order->id;
+        $user->notify(new OrderNotification($message, $orderId));
+        $order->delete();
+        $categories = Category::all();
+        $products = Product::all();
+        $cart = session()->get('cart', []);
+        return view('welcome', compact('categories', 'products', 'cart'));
     }
 }

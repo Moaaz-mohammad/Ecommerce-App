@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
@@ -13,7 +14,8 @@ class AddressController extends Controller
     public function index()
     {
         $addresses = Address::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
-        return view('addresses.index', compact('addresses'));
+        $cart = session()->get('cart', []);
+        return view('addresses.index', compact('addresses','cart'));
     }
 
     /**
@@ -33,6 +35,7 @@ class AddressController extends Controller
             'address' => 'required',
             'zip_code' => 'required',
             'title' => 'required',
+            // 'type' => 'required',
         ]);
 
         $new_address = Address::create([
@@ -40,6 +43,7 @@ class AddressController extends Controller
             'address' => $request->address,
             'zip_code' => $request->zip_code,
             'title' => $request->title,
+            'type' => 'none',
         ]);
 
         return redirect()->back()->with('success', 'Address added successfully');
@@ -87,5 +91,32 @@ class AddressController extends Controller
     {
         $address->delete();
         return redirect()->back()->with('success', 'Address deleted successfully');
+    }
+
+    public function upadteToFavorite($id) {
+        $userAddress = Address::find($id);
+        $addresses = Auth::user()->addresses;
+
+        foreach ($addresses as $address) {
+            if ($address->type == 'favorite') {
+                $address->update([
+                    'type' => 'none',
+                ]);
+            }
+        }
+        
+        if ($userAddress->type != 'favorite') {
+            $userAddress->update([
+                'type' => 'favorite',
+            ]);
+        }
+        // else {
+        //     $address->update([
+        //         'type' => 'none',
+        //     ]);
+        // }
+        // $address->save();
+        return redirect()->back()->with('success','favorite address selected');
+
     }
 }

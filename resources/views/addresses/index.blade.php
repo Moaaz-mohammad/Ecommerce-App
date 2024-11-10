@@ -4,10 +4,10 @@
 
 @section('content')
   <!-- Single Page Header start -->
-  <div class="container-fluid page-header py-5">
+  <div class="container-fluid page-header py-5 mt-5">
     <h1 class="text-center text-white display-6">Addresses</h1>
     <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{route('store')}}">Home</a></li>
         <li class="breadcrumb-item active text-white">Addresses</li>
     </ol>
   </div>
@@ -103,6 +103,7 @@
                   <th scope="col">Zip Code</th>
                   <th scope="col">Title</th>
                   <th scope="col">Actions</th>
+                  <th scope="col">Favorite</th>
                 </tr>
               </thead>
               <tbody>
@@ -119,6 +120,9 @@
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
+                  </td>
+                  <td>
+                    <a href="{{route('UpadteToFavorite', $address->id)}}" class="btn btn-warning btn-sm">{{$address->type == 'favorite' ? 'Delete From Favorite' :'Favorite' }}</a>
                   </td>
                 </tr>
                 @endforeach

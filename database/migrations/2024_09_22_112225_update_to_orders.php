@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders_tabel', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             $table->enum('order_status', ['prcessing', 'shipped', 'delivered']);
             $table->string('sell_price');
             $table->text('note');
@@ -23,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders_tabel', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
         });
     }

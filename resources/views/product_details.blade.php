@@ -30,7 +30,7 @@
                                     @foreach ($product->images as $images)
                                         <img src="{{asset('storage/products/'. $images->path)}}" class="w-25 img-fluid rounded" alt="Image">
                                     @endforeach
-                                </a>
+                                </a>z
                             </div>
                         </div>
                     </div>

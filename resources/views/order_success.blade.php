@@ -16,7 +16,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
-      <h2 class="text-center">Thank You Four Order</h2>
+      <h2 class="text-center my-5 py-5">Thank You Four Order</h2>
     </div>
   </div>
 </div>
